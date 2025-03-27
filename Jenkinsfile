@@ -12,9 +12,10 @@ pipeline {
 
         stage('List Files') {
             steps {
-                dir('./devops-assignment') {
-                    sh "ls -al"
-                }
+                sh 'la -al'
+                // dir('./devops-assignment') {
+                //     sh "ls -al"
+                // }
             }
         }
     }
