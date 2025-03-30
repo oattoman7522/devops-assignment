@@ -1,7 +1,6 @@
 bases:
   - ../../base
 
-namePrefix: dev-
 commonLabels:
   env: dev
   app: go
@@ -12,10 +11,3 @@ images:
   - name: IMAGE_NAME
     newName: ghcr.io/oattoman7522/go
     newTag: TAG_NUMBER
-
-secretGenerator:
-  - name: github-secret
-    type: kubernetes.io/dockerconfigjson
-    literals:
-      - ".dockerconfigjson={\"auths\":{\"ghcr.io\":{\"username\":\"oattoman7522\",\"password\":\"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\"}}}"
-    

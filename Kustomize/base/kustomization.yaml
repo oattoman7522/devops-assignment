@@ -1,6 +1,7 @@
 resources:
-  - deplotment.yaml
+  - deployment.yaml
   - service.yaml
+  - secret.yaml
 
 commonLabels:
   omwer: devops
