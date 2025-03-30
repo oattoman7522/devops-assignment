@@ -10,7 +10,7 @@ pipeline {
         DOCKER_TAG = "${BUILD_NUMBER}"
         IMAGE_REGISTY_URL = "ghcr.io"
         KUBECONFIG = credentials('kubeconfig')
-        ENV = "${params.Evironment}"
+        ENV = "${params.Environment}"
         
     }
 
@@ -26,6 +26,7 @@ pipeline {
         stage('List Files') {
             steps {
                 sh 'ls -al'
+                echo "${ENV}"
             }
         }
 
