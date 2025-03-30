@@ -4,6 +4,7 @@ bases:
 namePrefix: dev-
 commonLabels:
   env: dev
+  app: go
 namespace: dev-devops
 
 images:
@@ -13,7 +14,7 @@ images:
 
 secretGenerator:
   - name: github-secret
-    type: kubernetes.io/dockerconfigjso  
+    type: kubernetes.io/dockerconfigjson
     literals:
       - ".dockerconfigjson={\"auths\":{\"ghcr.io\":{\"username\":\"oattoman7522\",\"password\":\"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\"}}}"
     
