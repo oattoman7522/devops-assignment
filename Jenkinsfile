@@ -71,22 +71,22 @@ pipeline {
                 script {
                     if (env.ENV == 'DEV') {
                         sh """
-                            mkdir .kube
-                            echo "$KUBECONFIG" > .kube/kubeconfig'
-                            export KUBECONFIG=.kube/kubeconfig
-                            kubectl create -f argocd/dev-argocd.yaml
+                        mkdir -p .kube
+                        echo "$KUBECONFIG" > .kube/kubeconfig
+                        export KUBECONFIG=.kube/kubeconfig
+                        kubectl create -f argocd/dev-argocd.yaml
                         """
                     } else if (env.ENV == 'PROD') {
-                        input message: "Do you want to deploy applciation in ${env.ENV}?", ok: "Yes"
+                        input message: "Do you want to deploy application in ${env.ENV}?", ok: "Yes"
                         sh """
-                            mkdir .kube
-                            echo "$KUBECONFIG" > .kube/kubeconfig'
-                            export KUBECONFIG=.kube/kubeconfig
-                            kubectl create -f argocd/prod-argocd.yaml
+                        mkdir -p .kube
+                        echo "$KUBECONFIG" > .kube/kubeconfig
+                        export KUBECONFIG=.kube/kubeconfig
+                        kubectl create -f argocd/prod-argocd.yaml
                         """
                     } else {
-                        echo 'Deploy application fail.'
-                    }    
+                        echo 'Deploy application failed.'
+                    }   
                 }
             }
         }
