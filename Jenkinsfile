@@ -34,7 +34,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-few', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
-                            echo $PASSWORD | docker login $IMAGE_REGISTY_URL -u $USERNAME --password-stdin
+                            echo $PASSWORD | docker login $IMAGE_REGISTY_URL -u $USERNAME -p $PASSWORD
                             docker push $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG
                             docker rmi $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG
                         """
