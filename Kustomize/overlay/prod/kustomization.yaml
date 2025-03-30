@@ -5,6 +5,7 @@ namePrefix: prod-
 commonLabels:
   env: production
   app: go
+  web: fontend
 namespace: prod-devops
 
 
