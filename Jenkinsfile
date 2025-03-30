@@ -5,6 +5,7 @@ pipeline {
         DOCKER_IMAGE = "go"
         DOCKER_TAG = "${BUILD_NUMBER}"
         IMAGE_REGISTY_URL = "ghcr.io"
+        KUBECONFIG = credentials('kubeconfig')
         
     }
 
@@ -39,6 +40,48 @@ pipeline {
                             docker rmi $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG
                         """
                     }
+                }
+            }
+        }
+
+         stage('Patch file kustomiza') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'github-few', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        sh """
+                            echo "Sed value TAG_NUMBER env. dev"
+                            sed -i '' 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomiza/overlay/dev/kustomization.yaml
+                            echo "Sed value TAG_NUMBER env. dev"
+                            sed -i '' 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomiza/overlay/prod/kustomization.yaml
+                            echo "env.dev"
+                            cat Kustomiza/overlay/dev/kustomization.yaml
+                            echo "env.prod"
+                            cat Kustomiza/overlay/prod/kustomization.yaml
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Deploy application with argoCD ') {
+            steps {
+                script {
+                    if (env.ENV == 'DEV') {
+                        sh """
+                            echo "$KUBECONFIG" > kubeconfig.yaml'
+                            export KUBECONFIG=$(pwd)/kubeconfig.yaml
+                            kubectl create -f argocd/dev-argocd.yaml
+                        """
+                    } else if (env.ENV == 'PROD') {
+                        input message: "Do you want to deploy applciation in ${env.ENV}?", ok: "Yes"
+                        sh """
+                            echo "$KUBECONFIG" > kubeconfig.yaml'
+                            export KUBECONFIG=$(pwd)/kubeconfig.yaml
+                            kubectl create -f argocd/prod-argocd.yaml
+                        """
+                    } else {
+                        echo 'Deploy application fail.'
+                    }    
                 }
             }
         }
