@@ -5,6 +5,7 @@ pipeline {
         DOCKER_IMAGE = "go"
         DOCKER_TAG = "${BUILD_NUMBER}"
         IMAGE_REGISTY_URL = "ghcr.io"
+        
     }
 
     stages {
@@ -24,7 +25,7 @@ pipeline {
 
         stage('Build Application') {
             steps {
-                sh 'docker build -t $IMAGE_REGISTY_URL/devops-test/$DOCKER_IMAGE:$DOCKER_TAG . '
+                sh 'docker build -t $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG . '
             }
         }
 
@@ -34,7 +35,8 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github-few', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
                             echo $PASSWORD | docker login $IMAGE_REGISTY_URL -u $USERNAME --password-stdin
-                            docker push $IMAGE_REGISTY_URL/devops-test/$DOCKER_IMAGE:$DOCKER_TAG
+                            docker push $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG
+                            docker rmi $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG
                         """
                     }
                 }
