@@ -1,3 +1,28 @@
+properties([
+    parameters([
+        [$class: 'ChoiceParameter', 
+            choiceType: 'PT_RADIO',
+            description: 'Select Environment to deploy application',
+            filterLength: 1,
+            filterable: true,
+            name: 'Environment',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [], 
+                    sandbox: true, 
+                    script: 'return ["ERROR"]'
+                ],
+                script: [
+                    classpath: [], 
+                    sandbox: true, 
+                    script: 
+                        "return['DEV', 'PROD', 'DRP']"
+                ]
+            ]
+        ]
+    ])
+])
+
 pipeline {
     agent any
 
@@ -6,6 +31,7 @@ pipeline {
         DOCKER_TAG = "${BUILD_NUMBER}"
         IMAGE_REGISTY_URL = "ghcr.io"
         KUBECONFIG = credentials('kubeconfig')
+        ENV = "${params.Evironment}"
         
     }
 
