@@ -13,7 +13,7 @@ images:
 
 secretGenerator:
   - name: github-secret
-    type: kubernetes.io/dockerconfigjson  
+    type: kubernetes.io/dockerconfigjso  
     literals:
       - ".dockerconfigjson={\"auths\":{\"ghcr.io\":{\"username\":\"oattoman7522\",\"password\":\"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\"}}}"
     
