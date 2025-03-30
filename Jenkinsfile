@@ -54,14 +54,12 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'github-few', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
-                            echo "Sed value TAG_NUMBER env. dev"
-                            sed -i '' 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomiza/overlay/dev/kustomization.yaml
-                            echo "Sed value TAG_NUMBER env. dev"
-                            sed -i '' 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomiza/overlay/prod/kustomization.yaml
-                            echo "env.dev"
-                            cat Kustomiza/overlay/dev/kustomization.yaml
-                            echo "env.prod"
-                            cat Kustomiza/overlay/prod/kustomization.yaml
+                            echo "Sed value TAG_NUMBER env. DEV"
+                            sed -i '' 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomize/overlay/dev/kustomization.yaml
+                            cat Kustomize/overlay/dev/kustomization.yaml
+                            echo "Sed value TAG_NUMBER env. PROD"
+                            sed -i '' 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomize/overlay/prod/kustomization.yaml
+                            cat Kustomize/overlay/prod/kustomization.yaml
                         """
                     }
                 }
