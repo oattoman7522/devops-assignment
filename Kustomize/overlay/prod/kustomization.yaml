@@ -11,3 +11,10 @@ images:
   - name: IMAGE_NAME
     newName: ghcr.io/oattoman7522/go
     newTag: TAG_NUMBER
+
+secretGenerator:
+  - name: github-secret
+    type: kubernetes.io/dockerconfigjson  
+    literals:
+      - ".dockerconfigjson={\"auths\":{\"ghcr.io\":{\"username\":\"oattoman7522\",\"password\":\"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\"}}}"
+    
