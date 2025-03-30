@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build -o devops-test
+RUN GOOS=linux GOARCH=amd64 go build -o devops-test
 
 FROM alpine:latest  
 
