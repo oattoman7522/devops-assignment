@@ -1,0 +1,6 @@
+resources:
+  - deplotment.yaml
+  - service.yaml
+
+commonLabels:
+  omwer: devops
