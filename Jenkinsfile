@@ -11,7 +11,6 @@ pipeline {
         IMAGE_REGISTY_URL = "ghcr.io"
         KUBECONFIG = credentials('kubeconfig')
         ENV = "${params.Environment}"
-        
     }
 
     stages {
