@@ -16,7 +16,7 @@ spec:
         app: test
     spec:
       imagePullSecrets:
-      - name: github-secret
+      - name: dockerhub-secret
       containers:
       - name: application-devops
         image: IMAGE_NAME

@@ -1,20 +1,25 @@
-**Step Build Images and Push Images to Github Registry:**
+**Step Build Images and Push Images to Docker Hub:**
 
 1. Command Build Images
 
 ```
-docker build -t ghcr.io/oattoman7522/go:<tag_number> .
+docker build -t oattoman7522/devops-assignment:<tag_number> .
 ```
 
 2. Push Image to GitHub registry
 
 
-- Login Github Registry
+- Login Docker Hub
 ```
-docker login ghcr.io -u $USERNAME -p $PASSWORD
+docker login -u oattoman7522 -p $PASSWORD
 ```
 
-- Push Image to Github Registry
+- Push Image to Docker Hub
 ```
 docker push ghcr.io/oattoman7522/go:<tag_number>
+```
+
+- URL Docker Hub
+```
+https://hub.docker.com/repository/docker/oattoman7522/devops-assignment/general
 ```
