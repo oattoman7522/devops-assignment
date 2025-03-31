@@ -10,4 +10,4 @@ namespace: dev-devops
 images:
   - name: IMAGE_NAME
     newName: ghcr.io/oattoman7522/go
-    newTag: 37
+    newTag: "38"
