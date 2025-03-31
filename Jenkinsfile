@@ -55,11 +55,16 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github-few', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
                             echo "Sed value TAG_NUMBER env. DEV"
-                            sed -i 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomize/overlay/dev/kustomization.yaml,template >> Kustomize/overlay/dev/kustomization.yaml
+                            cp Kustomize/overlay/dev/kustomization.yaml.template Kustomize/overlay/dev/kustomization.yaml
+                            sed -i 's/TAG_NUMBER/"$DOCKER_TAG"/g' Kustomize/overlay/dev/kustomization.yaml
                             cat Kustomize/overlay/dev/kustomization.yaml
                             echo "Sed value TAG_NUMBER env. PROD"
-                            sed -i 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomize/overlay/prod/kustomization.yaml.template >> Kustomize/overlay/prod/kustomization.yaml
+                            cp Kustomize/overlay/prod/kustomization.yaml.template Kustomize/overlay/prod/kustomization.yaml
+                            sed -i 's/TAG_NUMBER/"$DOCKER_TAG"/g' Kustomize/overlay/prod/kustomization.yaml
                             cat Kustomize/overlay/prod/kustomization.yaml
+                            git add .
+                            git commit -m 'patch kustomize'
+                            git push https://$USERNAME:$PASSWORD@github.com/oattoman7522/devops-assignment.git main
                         """
                     }
                 }
