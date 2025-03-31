@@ -8,7 +8,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "go"
         DOCKER_TAG = "${BUILD_NUMBER}"
-        IMAGE_REGISTY_URL = "ghcr.io"
+        IMAGE_REGISTY_URL = "oattoman7522/devops-assignment"
         KUBECONFIG = credentials('kubeconfig')
         ENV = "${params.Environment}"
     }
@@ -31,18 +31,18 @@ pipeline {
 
         stage('Build Application') {
             steps {
-                sh 'docker build -t $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG . '
+                sh 'docker build -t $IMAGE_REGISTY_URL/$DOCKER_IMAGE:$DOCKER_TAG . '
             }
         }
 
         stage('Push Image') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github-few', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
-                            echo $PASSWORD | docker login $IMAGE_REGISTY_URL -u $USERNAME -p $PASSWORD
-                            docker push $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG
-                            docker rmi $IMAGE_REGISTY_URL/oattoman7522/$DOCKER_IMAGE:$DOCKER_TAG
+                            echo $PASSWORD | docker login -u $USERNAME -p $PASSWORD
+                            docker push $IMAGE_REGISTY_URL/$DOCKER_IMAGE:$DOCKER_TAG
+                            docker rmi $IMAGE_REGISTY_URL/$DOCKER_IMAGE:$DOCKER_TAG
                         """
                     }
                 }
