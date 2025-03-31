@@ -9,12 +9,12 @@ docker build -t ghcr.io/oattoman7522/go:<tag_number> .
 2. Push Image to GitHub registry
 
 
-Login Github Registry
+- Login Github Registry
 ```
 docker login ghcr.io -u $USERNAME -p $PASSWORD
 ```
 
-Push Image to Github Registry
+- Push Image to Github Registry
 ```
 docker push ghcr.io/oattoman7522/go:<tag_number>
 ```
