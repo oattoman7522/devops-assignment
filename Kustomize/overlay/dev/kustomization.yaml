@@ -1,0 +1,13 @@
+bases:
+  - ../../base
+
+commonLabels:
+  env: dev
+  app: go
+  web: fontend
+namespace: dev-devops
+
+images:
+  - name: IMAGE_NAME
+    newName: ghcr.io/oattoman7522/go
+    newTag: 37
