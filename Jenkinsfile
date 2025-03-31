@@ -73,6 +73,7 @@ pipeline {
                     if (env.ENV == 'DEV') {
                         withKubeConfig(caCertificate: '', clusterName: 'docker-desktop', contextName: 'docker-desktop', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://127.0.0.1:6443') {
                             sh """
+                            kubectl create ns dev-devops
                             kubectl create -f argocd/dev-argocd.yaml
                             kubectl get application -A
                             """
@@ -81,6 +82,7 @@ pipeline {
                         input message: "Do you want to deploy application in ${env.ENV}?", ok: "Yes"
                         withKubeConfig(caCertificate: '', clusterName: 'docker-desktop', contextName: 'docker-desktop', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://127.0.0.1:6443') {
                             sh """
+                            kubectl create ns prod-devops
                             kubectl create -f argocd/prod-argocd.yaml
                             kubectl get application -A
                             """
