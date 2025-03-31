@@ -63,6 +63,9 @@ pipeline {
                             cp Kustomize/overlay/prod/kustomization.yaml.template Kustomize/overlay/prod/kustomization.yaml
                             sed -i 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomize/overlay/prod/kustomization.yaml
                             cat Kustomize/overlay/prod/kustomization.yaml
+                            git add .
+                            git commit -m 'patch kustomize env. DEV'
+                            git push origin main
                         """
                     }
                 }
