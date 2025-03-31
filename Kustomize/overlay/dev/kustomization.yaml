@@ -9,5 +9,5 @@ namespace: dev-devops
 
 images:
   - name: IMAGE_NAME
-    newName: ghcr.io/oattoman7522/go
-    newTag: "38"
+    newName: oattoman7522/devops-assignment
+    newTag: "40"
