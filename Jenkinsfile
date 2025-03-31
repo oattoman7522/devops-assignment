@@ -31,7 +31,7 @@ pipeline {
 
         stage('Build Application') {
             steps {
-                sh 'docker build -t $IMAGE_REGISTY_URL/$DOCKER_IMAGE:$DOCKER_TAG . '
+                sh 'docker build -t $IMAGE_REGISTY_URL:$DOCKER_TAG . '
             }
         }
 
@@ -41,8 +41,8 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh """
                             echo $PASSWORD | docker login -u $USERNAME -p $PASSWORD
-                            docker push $IMAGE_REGISTY_URL/$DOCKER_IMAGE:$DOCKER_TAG
-                            docker rmi $IMAGE_REGISTY_URL/$DOCKER_IMAGE:$DOCKER_TAG
+                            docker push $IMAGE_REGISTY_URL:$DOCKER_TAG
+                            docker rmi $IMAGE_REGISTY_URL:$DOCKER_TAG
                         """
                     }
                 }
