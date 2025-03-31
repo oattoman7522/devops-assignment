@@ -65,7 +65,7 @@ pipeline {
                             cat Kustomize/overlay/prod/kustomization.yaml
                             git add .
                             git commit -m 'patch kustomize env. DEV'
-                            git push https://github.com/oattoman7522/devops-assignment.git main
+                            git push https://$USERNAME:$PASSWORD@github.com/oattoman7522/devops-assignment.git main
                         """
                     }
                 }
