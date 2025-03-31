@@ -10,6 +10,6 @@ namespace: prod-devops
 
 images:
   - name: IMAGE_NAME
-    newName: oattoman7522/devops-assignment/go
+    newName: oattoman7522/devops-assignment
     newTag: TAG_NUMBER
     
