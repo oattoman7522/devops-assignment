@@ -71,7 +71,7 @@ pipeline {
             steps {
                 script {
                     if (env.ENV == 'DEV') {
-                        withKubeConfig(caCertificate: '', clusterName: 'docker-desktop', contextName: 'docker-desktop', credentialsId: 'kubecofig', namespace: '', serverUrl: 'https://127.0.0.1:6443') {
+                        withKubeConfig(caCertificate: '', clusterName: 'docker-desktop', contextName: 'docker-desktop', credentialsId: 'kubeconfig', namespace: '', serverUrl: 'https://127.0.0.1:6443') {
                             sh """
                             kubectl create -f argocd/dev-argocd.yaml
                             kubectl get application -A
