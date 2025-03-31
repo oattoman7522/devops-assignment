@@ -57,14 +57,13 @@ pipeline {
                             echo "Sed value TAG_NUMBER env. DEV"
                             cp Kustomize/overlay/dev/kustomization.yaml.template Kustomize/overlay/dev/kustomization.yaml
                             sed -i 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomize/overlay/dev/kustomization.yaml
-                            ls -al Kustomize/overlay/dev/
                             cat Kustomize/overlay/dev/kustomization.yaml
                             echo "Sed value TAG_NUMBER env. PROD"
                             cp Kustomize/overlay/prod/kustomization.yaml.template Kustomize/overlay/prod/kustomization.yaml
                             sed -i 's/TAG_NUMBER/$DOCKER_TAG/g' Kustomize/overlay/prod/kustomization.yaml
                             cat Kustomize/overlay/prod/kustomization.yaml
                             git add .
-                            git commit -m 'patch kustomize env. DEV'
+                            git commit -m 'patch kustomize'
                             git push https://$USERNAME:$PASSWORD@github.com/oattoman7522/devops-assignment.git main
                         """
                     }
